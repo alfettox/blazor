@@ -1,0 +1,52 @@
+@page "/tasks"
+
+<h3>Task List</h3>
+
+<ul>
+    @foreach (var task in tasks)
+    {
+        <li>
+            <strong>@task.Title:</strong> @task.Description
+        </li>
+    }
+</ul>
+
+<h3>Weather Information</h3>
+
+<p>@weatherInfo</p>
+
+@code {
+    private List<TaskModel> tasks = new List<TaskModel>
+    {
+        new TaskModel { Id = 1, Title = "Task 1", Description = "Description for Task 1" },
+        new TaskModel { Id = 2, Title = "Task 2", Description = "Description for Task 2" },
+        new TaskModel { Id = 3, Title = "Task 3", Description = "Description for Task 3" },
+    };
+
+    private string weatherInfo = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadWeatherInfo();
+    }
+
+    private async Task LoadWeatherInfo()
+    {
+        string apiKey = "XXXX"; // API key
+        string city = "Montréal";
+
+        using (var httpClient = new HttpClient())
+        {
+            try
+            {
+                var weatherApiUrl = $"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={apiKey}&units=metric";
+                var response = await httpClient.GetStringAsync(weatherApiUrl);
+            }
+            catch (Exception ex)
+            {
+                response = "Failed to fetch weather information.";
+                Console.WriteLine(ex.Message);
+            }
+        }
+    }
+}

@@ -1,0 +1,15 @@
+﻿@page "/"
+
+<h3>Welcome to My Blazor App!</h3>
+
+<p>This is the home page content.</p>
+<li><NavLink href="/tasks">Task List</NavLink></li>
+
+<ul>
+    <li><NavLink href="/">Home</NavLink></li>
+    <li><NavLink href="/counter">Counter</NavLink></li>
+    <li><NavLink href="/fetchdata">Fetch data</NavLink></li>
+    <li><NavLink href="/tasks">Task List</NavLink></li>
+</ul>
+
+<RouteView DefaultLayout="@typeof(MainLayout)" />
