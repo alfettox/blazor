@@ -1,0 +1,15 @@
+@page "/scene1"
+
+<h3>Scene 1</h3>
+<p>This is the first scene of your visual novel.</p>
+<button @onclick="NavigateToNextScene">Next</button>
+
+@code {
+    [Inject]
+    private NavigationManager NavigationManager { get; set; }
+
+    private void NavigateToNextScene()
+    {
+        NavigationManager.NavigateTo("/scene2");
+    }
+}
